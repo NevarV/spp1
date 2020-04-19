@@ -4,9 +4,11 @@ import com.spp.server.spp1.entity.User;
 import com.spp.server.spp1.repository.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
@@ -34,10 +36,10 @@ public class MainController {
         return new RedirectView("users");
     }
 
-    @PostMapping(path="delete/{id}")
-    public String deleteUser(@PathVariable("id") long id) {
+    @DeleteMapping(path="users/{id}")
+    public @ResponseBody
+    void deleteUser(@PathVariable("id") long id) {
         userRepository.deleteById(id);
-        return "redirect:/users";
     }
 
     @PostMapping("update")

@@ -68,9 +68,7 @@
                                                 class="fa fa-square fa-stack-2x" style="color: #3498db;"></i> <i
                                                 class="fa fa-pencil fa-stack-1x fa-inverse"></i></span></td>
                                         <td scope="row"><span class="fa-stack"><form action="#"
-                                                                                     th:action="@{/delete/{id}(id=${user.id})}"
-                                                                                     method="post"
-                                                                                     onclick="this.submit()"> <i
+                                                                                     th:onclick="|deleteUser('${user.id}')|"> <i
                                                 class="fa fa-square fa-stack-2x" style="color: #e74c3c;"></i> <i
                                                 class="fa fa-trash-o fa-stack-1x fa-inverse"></i></form></span></td>
                                     </tr>
@@ -88,5 +86,18 @@
         </div>
     </div>
 </div>
+<script>
+    function deleteUser(id) {
+        console.log("I am here");
+        $.ajax({
+            url: '/users/' + id,
+            type: 'DELETE',
+            success: function (data) {
+                debugger;
+                window.location.href = "users";
+            }
+        });
+    }
+</script>
 </body>
 </html>
